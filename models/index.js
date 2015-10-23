@@ -1,11 +1,10 @@
 var fs        = require("fs");
 var path      = require("path");
 var Sequelize = require("sequelize");
-var sequelize = new Sequelize("woof", "kurtdacosta", null, {dialect: "postgres"});
+var config    = require(__dirname + '/../config/secrets.js').database.pg;
+var sequelize = new Sequelize(config.database, config.username, config.password, config);
 var db        = {};
 
-
-// METHODS
 
 var isModel = function (file) {
 	var hasExtension 	= file.indexOf(".") !== 0;
