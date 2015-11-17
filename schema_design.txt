@@ -1,0 +1,111 @@
+Models
+
+
+user = {
+	id: integer,
+	f_name: string,
+	l_name: string,
+	email: string,
+	password_hash: string,
+	description: string,
+	age: integer,
+	phone: string,
+	address_id: integer
+}
+
+address = {
+	id: integer,
+	street_name: string,
+	street_number: string,
+	state_id: integer
+}
+
+state = {
+	id: integer,
+	state: string,
+	city: string,
+	sales_tax: float,
+	country_id: integer
+}
+
+country = {
+	id: integer,
+	name: string,
+	sales_tax: float,
+	currency_id: integer
+}
+
+currency = {
+	id: integer,
+	name: string,
+	title: string
+}
+
+creditcard = {
+	id: integer,
+	name: string,
+	number: integer,
+	ccv: integer,
+	exp_month: integer,
+	exp_year: integer,
+	user_id: integer
+}
+
+breed = {
+	id: integer,
+	name: string,
+	lifespan: integer,
+	expected_weight: integer,
+	shedding: bool,
+	child_friendly: bool
+}
+
+listing = {
+	id: integer,
+	name: string,
+	age: float,
+	cost: float,
+	deposit: float,
+	visible: bool,
+	available: bool,
+	description: string,
+	user_id: integer,
+	breed_id: integer,
+	gallery_id: integer
+}
+
+request = {
+	id: integer,
+	user_id: integer,
+	listing_id: integer
+}
+
+purchase = {
+	id: integer,
+	status: string,
+	request_id: integer,
+}
+
+review = {
+	id: integer,
+	listing_id: integer,
+	user_id: integer
+}
+
+message = {
+	id: integer, 
+	snd_user_id: integer,
+	rcv_user_id: integer,
+	text: string
+}
+
+listing_image = {
+	listing_id: integer,
+	image_id: integer
+}
+
+image = {
+	id: integer,
+	url: string,
+	user_id: integer
+}
