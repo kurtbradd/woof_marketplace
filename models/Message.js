@@ -11,16 +11,16 @@ module.exports = function(sequelize, DataTypes) {
 			autoIncrement: true
 		},
 		sender_user_id: {
-      allowNull: false,
-      type: DataTypes.BIGINT,
-      references: { model: "Users", key: "id" }
-    },
-    reciever_user_id: {
-      allowNull: false,
-      type: DataTypes.BIGINT,
-      references: { model: "Users", key: "id" }
-    },
-    text: DataTypes.STRING
+			allowNull: false,
+			type: DataTypes.BIGINT,
+			references: { model: "Users", key: "id" }
+		},
+		reciever_user_id: {
+			allowNull: false,
+			type: DataTypes.BIGINT,
+			references: { model: "Users", key: "id" }
+		},
+		text: DataTypes.STRING
 	}, {
 		tableName: 'Messages'
 	});

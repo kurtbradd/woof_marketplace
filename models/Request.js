@@ -11,15 +11,15 @@ module.exports = function(sequelize, DataTypes) {
 			autoIncrement: true
 		},
 		user_id: {
-      allowNull: false,
-      type: DataTypes.BIGINT,
-      references: { model: "Users", key: "id" }
-    },
-    listing_id: {
-      allowNull: false,
-      type: DataTypes.BIGINT,
-      references: { model: "Listings", key: "id" }
-    }
+			allowNull: false,
+			type: DataTypes.BIGINT,
+			references: { model: "Users", key: "id" }
+    	},
+    	listing_id: {
+			allowNull: false,
+			type: DataTypes.BIGINT,
+			references: { model: "Listings", key: "id" }
+    	}
 	}, {
 		tableName: 'Requests'
 	});

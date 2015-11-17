@@ -1,6 +1,6 @@
 var bcrypt 					= require('bcrypt-nodejs');
-var restify  				= require('restify');
-var async   				= require('async');
+var restify					= require('restify');
+var async					= require('async');
 
 module.exports = function(sequelize, DataTypes) {
 	var Listing = sequelize.define('Listing', {
@@ -11,14 +11,14 @@ module.exports = function(sequelize, DataTypes) {
 			autoIncrement: true
 		},
 		user_id: {
-      allowNull: false,
-      type: DataTypes.BIGINT,
-      references: { model: "Users", key: "id" }
-    },
-    breed_id: {
 			allowNull: false,
-      type: DataTypes.BIGINT,
-      references: { model: "Breeds", key: "id" }
+			type: DataTypes.BIGINT,
+			references: { model: "Users", key: "id" }
+		},
+		breed_id: {
+			allowNull: false,
+			type: DataTypes.BIGINT,
+			references: { model: "Breeds", key: "id" }
 		},
 		visible: DataTypes.BOOLEAN,
 		name: DataTypes.STRING,
