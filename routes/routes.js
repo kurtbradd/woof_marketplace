@@ -15,11 +15,12 @@ module.exports = function (server) {
   server.post(sessionsEndpoint + '/register', SessionCtrl.register);
   server.post(sessionsEndpoint + '/login', SessionCtrl.login);
   server.get (sessionsEndpoint + '/logout', SessionCtrl.logout);
+  server.del (sessionsEndpoint + '/cancel', SessionCtrl.cancel);
 
   // USER
   var userEndpoint = '/user';
   server.get (userEndpoint + '/profile', UserCtrl.getMyUserProfile);
-  server.get (userEndpoint + '/profile/:id', UserCtrl.getUserProfile);
+  server.get (userEndpoint + '/profile/:user_id', UserCtrl.getUserProfile);
   server.post(userEndpoint + '/profilepic', UserCtrl.updateUserProfilePicture);
   server.post(userEndpoint + '/password', UserCtrl.updateUserPassword);
   server.post(userEndpoint + '/profile', UserCtrl.updateUserProfile);
