@@ -14,12 +14,12 @@ module.exports = function(sequelize, DataTypes) {
 			allowNull: false,
 			type: DataTypes.BIGINT,
 			references: { model: "Users", key: "id" }
-    	},
-    	listing_id: {
+		},
+		listing_id: {
 			allowNull: false,
 			type: DataTypes.BIGINT,
 			references: { model: "Listings", key: "id" }
-    	}
+		}
 	}, {
 		tableName: 'Requests'
 	});
