@@ -20,7 +20,10 @@ server.on('after', errorHandler);
 server.on('uncaughtException', errorHandler);
 
 // Load Database Models
-require('./models/index');
+require('./models/index').loadModels(function (err) {
+	if (err) return console.errorHandler(err);
+	return console.log("Models Loaded");
+});
 
 // Load Routes
 require('./routes/routes.js')(server);

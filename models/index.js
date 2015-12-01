@@ -28,15 +28,20 @@ var successHandler = function () {
 	console.log("Models Loaded");
 }
 
-// Load & Import Data Models from definitions
-fs.readdirSync(__dirname).filter(isModel).forEach(importModel);
 
-// Associate Data Models with Sequelize Models
-Object.keys(db).forEach(associateModel);
+db.loadModels = function (cb) {
+	// Load & Import Data Models from definitions
+	fs.readdirSync(__dirname).filter(isModel).forEach(importModel);
 
-// Syncronize Database with Sequelize Models
-sequelize.sync( { force: false } ).then(successHandler);
+	// Associate Data Models with Sequelize Models
+	Object.keys(db).forEach(associateModel);
 
+	// Syncronize Database with Sequelize Models
+	sequelize.sync( { force: true } )
+	.then(function () { cb(null); })
+	.catch(cb);
+
+}
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
