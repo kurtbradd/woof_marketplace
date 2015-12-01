@@ -7,13 +7,20 @@ module.exports = {
 
 	// HTTP GET /user
 	getProfile: function getProfile (req, res, next) {
-		return res.send(200);
+		db.User.findOne({where: {id: req.user}}).then(function (user) {
+			return res.send(200, {user: user});
+		}).catch(next);
 	},
 
 
 	// HTTP GET /user/:user_id
 	getUserProfile: function getUserProfile (req, res, next) {
-		return res.send(200);
+		var user_id = req.params.user_id;
+		if (!user_id) return next(new restify.MissingParameterError('Missing User ID'));
+
+		db.User.findOne({where: {id: user_id}}).then(function (user) {
+			return res.send(200, {user: user});
+		}).catch(next);
 	},
 
 
