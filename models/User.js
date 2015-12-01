@@ -1,3 +1,4 @@
+var PasswordHelper 	= require('../modules/PasswordHelper.js');
 var bcrypt 					= require('bcrypt-nodejs');
 var restify  				= require('restify');
 var async   				= require('async');
@@ -13,7 +14,13 @@ module.exports = function(sequelize, DataTypes) {
 		f_name: DataTypes.STRING,
 		l_name: DataTypes.STRING,
 		age: DataTypes.INTEGER,
-		email: DataTypes.STRING,
+		email: {
+			index: true,
+			allowNull: false,
+			type: DataTypes.STRING,
+			foreignKey: true,
+			unique: true,
+		},
 		phone: DataTypes.STRING,
 		password: DataTypes.STRING,
 		description: DataTypes.STRING,
@@ -28,10 +35,7 @@ module.exports = function(sequelize, DataTypes) {
 				return values;
 			},
 			comparePassword: function(password, done) {
-				bcrypt.compare(password, this.password, function(err, isMatch) {
-					if (done && err) return done(err);
-					if (done) return done(null, isMatch);
-				});
+				bcrypt.compare(password, this.password, done);
 			},
 			changePassword: function (oldPassword, newPassword, done) {
 				var values = this.get();
@@ -48,6 +52,23 @@ module.exports = function(sequelize, DataTypes) {
 			}
 		}
 	});
+
+	User.beforeCreate(function (user, options, fn) {
+		PasswordHelper.hashPassword(user.password, function (err, hash) {
+			if (err) return fn(err);
+			user.password = hash;
+			return fn(null, user);
+		});
+	})
+
+	User.beforeUpdate(function (user, options, fn) {
+		if (!user.changed("password")) return fn(null, user);
+		PasswordHelper.hashPassword(user.password, function (err, hash) {
+			if (err) return fn(err);
+			user.password = hash;
+			return fn(null, user);
+		})
+	})
 
 	return User;
 };
