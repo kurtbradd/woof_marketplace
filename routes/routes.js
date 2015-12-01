@@ -23,7 +23,7 @@ module.exports = function (server) {
   // USER
   var userEndpoint = '/user';
   server.get (userEndpoint + '/', UserCtrl.getProfile);
-  server.get (userEndpoint + '/:user_id', UserCtrl.getProfile);
+  server.get (userEndpoint + '/:user_id', UserCtrl.getUserProfile);
   server.post(userEndpoint + '/profilepic', UserCtrl.updateProfilePicture);
   server.post(userEndpoint + '/password', UserCtrl.updatePassword);
   server.post(userEndpoint + '/profile', UserCtrl.updateProfile);
