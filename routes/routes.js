@@ -1,14 +1,17 @@
-var restify = require('restify');
-var UserCtrl = require('./controllers/UserCtrl');
+var restify     = require('restify');
+var UserCtrl    = require('./controllers/UserCtrl');
 var SessionCtrl = require('./controllers/SessionCtrl');
 var ListingCtrl = require('./controllers/ListingCtrl');
+var TokenManager = require('../modules/TokenManager.js');
 
 module.exports = function (server) {
 
-  // TEST ECHO ROUTE
-  server.get('/echo/:name', function (req, res, next) {
-    return res.send(req.params);
-  });
+
+  server.use(function (req, res, next) {
+    if (req.url == '/session/register') return next();
+    if (req.url == '/session/login') return next();
+    TokenManager.verifyToken(req, res, next);
+  })
 
   // SESSIONS
   var sessionsEndpoint = '/session';
@@ -38,6 +41,11 @@ module.exports = function (server) {
 
   // TRANSACTION
   var transaction = '/'
+  
+  // TEST ROUTE
+  server.get('/echo/:name', function (req, res, next) {
+    return res.send(req.params);
+  });
   
   console.log('Routes loaded');
 }
