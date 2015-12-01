@@ -6,16 +6,12 @@ var server        = restify.createServer(serverConfig);
 server.use(restify.acceptParser(server.acceptable));
 server.use(restify.authorizationParser());
 server.use(restify.queryParser());
-// server.use(restify.jsonBodyParser());
+server.use(restify.bodyParser());
 
 var errorHandler = function (req, res, route, error) {
   if (error) {
-    console.error({
-      path: route.spec.path,
-      errorCode: error.statusCode,
-      body: error.body,
-      req_params: req.params
-    });
+  	console.log("SERVER ERROR");
+  	console.error(error);
   }
 }
 
