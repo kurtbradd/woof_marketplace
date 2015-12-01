@@ -35,7 +35,7 @@ fs.readdirSync(__dirname).filter(isModel).forEach(importModel);
 Object.keys(db).forEach(associateModel);
 
 // Syncronize Database with Sequelize Models
-sequelize.sync({force:true}).then(successHandler);
+sequelize.sync( { force: false } ).then(successHandler);
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
