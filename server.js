@@ -21,7 +21,7 @@ server.on('uncaughtException', errorHandler);
 
 // Load Database Models
 require('./models/index').loadModels(function (err) {
-	if (err) return console.errorHandler(err);
+	if (err) return console.error(err);
 	return console.log("Models Loaded");
 });
 
