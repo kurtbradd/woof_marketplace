@@ -6,9 +6,9 @@ module.exports = function(sequelize, DataTypes) {
 	var Message = sequelize.define('Message', {
 		message_id: {
 			unique: true,
-			type: DataTypes.BIGINT,
 			primaryKey: true,
-			autoIncrement: true
+			autoIncrement: true,
+			type: DataTypes.BIGINT
 		},
 		snd_user_id: {
 			allowNull: false,

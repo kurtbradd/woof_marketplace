@@ -6,9 +6,9 @@ module.exports = function(sequelize, DataTypes) {
 	var Purchase = sequelize.define('Purchase', {
 		purchase_id: {
 			unique: true,
-			type: DataTypes.BIGINT,
 			primaryKey: true,
-			autoIncrement: true
+			autoIncrement: true,
+			type: DataTypes.BIGINT
 		},
 		request_id: {
 			allowNull: false,
@@ -17,7 +17,7 @@ module.exports = function(sequelize, DataTypes) {
 		},
 		status: DataTypes.STRING,
 		timestamp: DataTypes.DATE,
-		commission: DataTypes.FLOAT,
+		commission: DataTypes.FLOAT
 	}, {
 		tableName: 'Purchases'
 	});

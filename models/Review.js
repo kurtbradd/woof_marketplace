@@ -6,9 +6,9 @@ module.exports = function(sequelize, DataTypes) {
 	var Review = sequelize.define('Review', {
 		review_id: {
 			unique: true,
-			type: DataTypes.BIGINT,
 			primaryKey: true,
-			autoIncrement: true
+			autoIncrement: true,
+			type: DataTypes.BIGINT
 		},
 		listing_id: {
 			allowNull: false,
@@ -20,6 +20,7 @@ module.exports = function(sequelize, DataTypes) {
 			type: DataTypes.BIGINT,
 			references: { model: "Users", key: "user_id" }
 		},
+		content: DataTypes.STRING,
 		timestamp: DataTypes.DATE
 	}, {
 		tableName: 'Reviews'

@@ -6,9 +6,9 @@ module.exports = function(sequelize, DataTypes) {
 	var Listing = sequelize.define('Listing', {
 		listing_id: {
 			unique: true,
-			type: DataTypes.BIGINT,
 			primaryKey: true,
-			autoIncrement: true
+			autoIncrement: true,
+			type: DataTypes.BIGINT
 		},
 		user_id: {
 			allowNull: false,

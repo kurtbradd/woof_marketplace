@@ -6,9 +6,9 @@ module.exports = function(sequelize, DataTypes) {
 	var Breed = sequelize.define('Breed', {
 		breed_id: {
 			unique: true,
-			type: DataTypes.BIGINT,
 			primaryKey: true,
-			autoIncrement: true
+			autoIncrement: true,
+			type: DataTypes.BIGINT
 		},
 		name: DataTypes.STRING,
 		lifespan: DataTypes.INTEGER,

@@ -6,9 +6,9 @@ module.exports = function(sequelize, DataTypes) {
 	var ListingImage = sequelize.define('ListingImage', {
 		image_id: {
 			unique: true,
-			type: DataTypes.BIGINT,
 			primaryKey: true,
-			autoIncrement: true
+			autoIncrement: true,
+			type: DataTypes.BIGINT
 		},
 		listing_id: {
 			allowNull: false,

@@ -10,9 +10,13 @@ module.exports = function(sequelize, DataTypes) {
 			type: DataTypes.BIGINT,
 			references: { model: "Users", key: "user_id" }
 		},
+		city_id: {
+			allowNull: false,
+			type: DataTypes.BIGINT,
+			references: { model: "City", key: "city_id" }
+		},
 		street_name: DataTypes.STRING,
-		street_number: DataTypes.STRING,
-		zipcode: DataTypes.STRING
+		street_number: DataTypes.STRING
 	}, {
 		tableName: 'Addresses'
 	});
