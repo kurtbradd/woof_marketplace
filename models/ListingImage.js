@@ -3,21 +3,22 @@ var restify  				= require('restify');
 var async   				= require('async');
 
 module.exports = function(sequelize, DataTypes) {
-	var Breed = sequelize.define('Breed', {
-		breed_id: {
+	var ListingImage = sequelize.define('ListingImage', {
+		image_id: {
 			unique: true,
 			type: DataTypes.BIGINT,
 			primaryKey: true,
 			autoIncrement: true
 		},
-		name: DataTypes.STRING,
-		lifespan: DataTypes.INTEGER,
-		expected_weight: DataTypes.INTEGER,
-		shedding: DataTypes.BOOLEAN,
-		child_friendly: DataTypes.BOOLEAN
+		listing_id: {
+			allowNull: false,
+			type: DataTypes.BIGINT,
+			references: { model: "Listings", key: "listing_id" }
+		},
+		filepath: DataTypes.STRING
 	}, {
-		tableName: 'Breeds'
+		tableName: 'ListingImages'
 	});
 
-	return Breed;
+	return ListingImage;
 };

@@ -3,7 +3,7 @@ module.exports = function(sequelize, DataTypes) {
 		user_id: {
 			primaryKey: true,
 			type: DataTypes.BIGINT,
-			references: { model: "Users", key: "id" }
+			references: { model: "Users", key: "user_id" }
 		},
 		token: {
 			primaryKey: true,

@@ -5,7 +5,7 @@ var async   				= require('async');
 
 module.exports = function(sequelize, DataTypes) {
 	var User = sequelize.define('User', {
-		id: {
+		user_id: {
 			unique: true,
 			type: DataTypes.BIGINT,
 			primaryKey: true,
@@ -13,6 +13,7 @@ module.exports = function(sequelize, DataTypes) {
 		},
 		f_name: DataTypes.STRING,
 		l_name: DataTypes.STRING,
+		admin: DataTypes.BOOLEAN,
 		age: DataTypes.INTEGER,
 		email: {
 			index: true,
@@ -24,6 +25,7 @@ module.exports = function(sequelize, DataTypes) {
 		phone: DataTypes.STRING,
 		password: DataTypes.STRING,
 		description: DataTypes.STRING,
+		timestamp: DataTypes.DATE
 	}, {
 		tableName: 'Users',
 		instanceMethods: {
