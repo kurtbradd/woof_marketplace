@@ -1,8 +1,8 @@
 describe('Sessions', function () {
 
-	before(function (done) {
-		done();
-	})
+  beforeEach(function(done) {
+    setTimeout(done, 1000);
+  });
 	
 	describe('Register', function (){
 		
