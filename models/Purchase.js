@@ -15,7 +15,7 @@ module.exports = function(sequelize, DataTypes) {
 			type: DataTypes.BIGINT,
 			references: { model: "Requests", key: "request_id" }
 		},
-		status: DataTypes.STRING
+		status: DataTypes.STRING,
 		timestamp: DataTypes.DATE,
 		commission: DataTypes.FLOAT,
 	}, {
