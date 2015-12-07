@@ -25,6 +25,18 @@ require('./models/index').loadModels(function (err) {
 	return console.log("Models Loaded");
 });
 
+// Static Files
+server.get(/\/?.(js|css|html)/, restify.serveStatic({
+  directory: __dirname + '/public',
+  default: 'index.html',
+  match: /^((?!app.js).)*$/
+}));
+
+server.get('/', restify.serveStatic({
+  directory: __dirname + '/public',
+  default: 'index.html'
+}));
+
 // Load Routes
 require('./routes/routes.js')(server);
 
