@@ -42,7 +42,7 @@ var loadModels = function (cb) {
       return async.each(Object.keys(db), associateModel, cb);
     },
     function syncronizeSequelize (cb) {
-      sequelize.sync({force: true})
+      sequelize.sync({force: false})
       .then(function () { cb(null); }).catch(cb);
     }
   ], cb);

@@ -8,7 +8,7 @@ module.exports = {
   },
   database: {
     pg: {
-      username: "kurtdacosta",
+      username: "woof",
       password: "woof",
       database: "woof",
       host: "0.0.0.0",
