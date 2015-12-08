@@ -18,6 +18,7 @@ module.exports = function(sequelize, DataTypes) {
 		street_name: DataTypes.STRING,
 		street_number: DataTypes.STRING
 	}, {
+		timestamps: false,
 		tableName: 'Addresses'
 	});
 

@@ -29,6 +29,7 @@ module.exports = function(sequelize, DataTypes) {
 		description: DataTypes.STRING,
 		timestamp: DataTypes.DATE
 	}, {
+		timestamps: false,
 		tableName: 'Listings'
 	});
 

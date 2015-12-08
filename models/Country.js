@@ -13,6 +13,7 @@ module.exports = function(sequelize, DataTypes) {
 		code: DataTypes.STRING,
 		name: DataTypes.STRING
 	}, {
+		timestamps: false,
 		tableName: 'Country'
 	});
 

@@ -16,6 +16,7 @@ module.exports = function(sequelize, DataTypes) {
 		shedding: DataTypes.BOOLEAN,
 		child_friendly: DataTypes.BOOLEAN
 	}, {
+		timestamps: false,
 		tableName: 'Breeds'
 	});
 

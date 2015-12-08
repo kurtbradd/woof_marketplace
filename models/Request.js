@@ -23,6 +23,7 @@ module.exports = function(sequelize, DataTypes) {
 		status: DataTypes.STRING,
 		timestamp: DataTypes.DATE
 	}, {
+		timestamps: false,
 		tableName: 'Requests'
 	});
 

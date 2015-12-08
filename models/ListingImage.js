@@ -17,6 +17,7 @@ module.exports = function(sequelize, DataTypes) {
 		},
 		filepath: DataTypes.STRING
 	}, {
+		timestamps: false,
 		tableName: 'ListingImages'
 	});
 

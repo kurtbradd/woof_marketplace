@@ -19,6 +19,7 @@ module.exports = function(sequelize, DataTypes) {
 		timestamp: DataTypes.DATE,
 		commission: DataTypes.FLOAT
 	}, {
+		timestamps: false,
 		tableName: 'Purchases'
 	});
 
