@@ -1,0 +1,27 @@
+<nav class="navbar navbar-default navbar-fixed-top navbar-woof">
+	<div class="container">
+		
+		<!-- COLLAPSED NAVIGATION -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#woof-nav-collapse" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" ui-sref="app.home">
+				<img src="img/woof-text-logo-white.png">
+			</a>
+		</div>
+
+		<!-- FULL WIDTH NAVIGATION -->
+		<div class="collapse navbar-collapse" id="woof-nav-collapse">
+			<ul class="nav navbar-nav navbar-right">
+				<li><a ui-sref="app.search">Browse</a></li>
+				<li><a ui-sref="app.profile">Profile</a></li>
+				<li><a ui-sref="app.signin">Sign In</a></li>
+				<li><a ui-sref="app.signup">Sign Up</a></li>
+			</ul>
+		</div>
+	</div>
+</nav>

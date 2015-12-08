@@ -1,0 +1,95 @@
+<div class="container">
+	<div class="row">
+		<!-- SEARCH SIDE BAR -->
+		<div class="col-sm-3">
+			<div class="search-container">
+				<div class="title-box"><h4>Search</h4></div>
+				<div class="row">
+					<!-- LOCATION -->
+					<div class="col-sm-12">
+						<label class="field-label">Location:</label>
+						<div class="search-box">
+							<input 
+							type="text" 
+							placeholder="Name" 
+							ng-model="filter.location">
+						</div>
+					</div>
+					<!-- AGE -->
+					<div class="col-sm-12">
+						<label class="field-label">Age:</label>
+						<div class="search-box">
+							<input 
+							type="text"
+							placeholder="Min" 
+							ng-model="filter.age_min">
+						</div>
+						<div class="search-box">
+							<input 
+							type="text"
+							placeholder="Max" 
+							ng-model="filter.age_max">
+						</div>
+					</div>
+					<!-- COST -->
+					<div class="col-sm-12">
+						<label class="field-label">Cost:</label>
+						<!-- COST MIN -->
+						<div class="search-box">
+							<input 
+							type="text" 
+							placeholder="Min" 
+							ng-model="filter.cost_min">
+							</div>
+						<!-- COST MAX -->
+						<div class="search-box">
+							<input 
+							type="text" 
+							placeholder="Max" 
+							ng-model="filter.cost_max">
+						</div>
+					</div>
+					<!-- BREED -->
+					<div class="col-sm-12">
+						<label class="field-label">Breed:</label>
+						<div class="search-box">
+							<select class="form-control" name="occasion" rv-value="data.filterOccasion">
+								<option value="None">None</option>
+								<option rv-each-occasion="data.occasions" rv-text="occasion.Description"></option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-sm-9 padding-sides">
+			<div class="listing-container">
+				<div class="title-box">
+					<h4>Listings</h4>
+				</div>
+
+				<div class="row">
+					<div 
+					ng-repeat=
+					"listing in listings | filter:isAvailable | filter:filterByCost | filter:filterByAge"
+					class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+						<div class="thumbnail listing">
+							<img class="img-rounded" ng-src="/img/{{listing.images[0].filepath}}">
+							<div class="caption text-center">
+								<h3>{{listing.name}}</h3>
+								<h4>{{listing.description}}</h4>
+								<p>${{listing.cost}}</p>
+								<a ui-sref="app.listing({listing_id: listing.listing_id})" class="btn btn-primary" role="button">More Info</a> 
+							</div>
+						</div>
+					</div>
+
+
+				</div>
+
+			</div> <!-- END-LISTING-CONTAINER -->
+		</div>
+
+	</div>  <!-- END-ROW -->
+</div> <!-- END-CONTAINER -->
