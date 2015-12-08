@@ -1,9 +1,10 @@
 var restify       = require('restify');
 var serverConfig  = require('./config/secrets').server;
 var server        = restify.createServer(serverConfig);
+var fs = require('fs');
 
 // Restify Config
-server.use(restify.acceptParser(server.acceptable));
+// server.use(restify.acceptParser(server.acceptable));
 server.use(restify.authorizationParser());
 server.use(restify.queryParser());
 server.use(restify.bodyParser());
@@ -28,17 +29,28 @@ require('./models/index').loadModels(function (err) {
 // Static Files
 server.get(/\/?.(js|css|html|jpg|png)/, restify.serveStatic({
   directory: __dirname + '/public',
-  default: 'index.html',
-  match: /^((?!app.js).)*$/
+  // default: 'index.html',
+  // match: /^((?!app.js).)*$/
 }));
 
-server.get('/', restify.serveStatic({
-  directory: __dirname + '/public',
-  default: 'index.html'
-}));
+// server.get('/', restify.serveStatic({
+//   directory: __dirname + '/public',
+//   default: 'index.html'
+// }));
 
 // Load Routes
 require('./routes/routes.js')(server);
+
+server.get(/^\/?.*/, function (req, res, next) {
+  var indexHtmlFilePath = __dirname + '/public/index.html';
+  fs.readFile(indexHtmlFilePath, function (err, data) {
+    if (err) return next(err);
+    res.setHeader('Content-Type', 'text/html');
+    res.writeHead(200);
+    res.end(data);
+    next();
+  });
+});
 
 // Start Server
 server.listen(serverConfig.port, function () {
