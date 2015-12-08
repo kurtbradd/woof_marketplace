@@ -4,7 +4,7 @@
 	<div class="row">
 		<div class="col-sm-12">
 			<div class="listing-header">
-					<h1>Molly & Fred</h1>
+					<h1>{{listing.name}}</h1>
 					<h3>Golden Retreiver</h3>
 			</div>
 		</div>
@@ -19,26 +19,30 @@
 			<div class="listing-container listing-gallery">
 
 				<div class="gallery-image">
-					<img class="img-responsive center-block img-rounded" src="/img/puppy.jpg">
+					<img 
+					class="img-responsive center-block img-rounded" 
+					ng-src="/img/{{listing.images[0].filepath}}">
 				</div>
 
 				<div class="gallery-box">
 					<div class="row">
 
-						<div class="col-xs-3">
-							<img class="img-responsive" src="/img/puppy.jpg"></img>
+						<div class="col-xs-4">
+							<img 
+							class="img-responsive"
+							ng-src="/img/{{listing.images[0].filepath}}">
 						</div>
 						
-						<div class="col-xs-3">
-							<img class="img-responsive" src="/img/puppy.jpg"></img>
+						<div class="col-xs-4">
+							<img 
+							class="img-responsive"
+							ng-src="/img/{{listing.images[1].filepath}}">
 						</div>
 						
-						<div class="col-xs-3">
-							<img class="img-responsive" src="/img/puppy.jpg"></img>
-						</div>
-						
-						<div class="col-xs-3">
-							<img class="img-responsive" src="/img/puppy.jpg"></img>
+						<div class="col-xs-4">
+							<img 
+							class="img-responsive"
+							ng-src="/img/{{listing.images[2].filepath}}">
 						</div>
 
 					</div>
@@ -53,10 +57,7 @@
 				</div>
 				<!-- CONTAINER CONTENT -->
 				<div class="listing-content">
-					<p>
-						We have 2 adorable puppies for sale just in time for Christmas! 
-						Their mother and father are both show quality golden retrievers. She is a very smart medium sized dog. Their father is also very smart and is a large dog. These beautiful puppies will become about the size of a medium retriever. They are available immediately. They have been fed dry puppy food and are living in the comfort of our bedroom with their mother. They are very happy and healthy. $500 each. Text Send me a message to setup a meeting smile emoticon :)
-					</p>
+					<p>{{listing.description}}</p>
 				</div>
 
 			</div>
@@ -85,7 +86,7 @@
 			<div class="listing-container text-center">
 				<div class="row">
 					<div class="col-xs-12">
-						<h2>$600</h2>
+						<h2>${{listing.cost}}</h2>
 					</div>
 					<div class="col-xs-12">
 						<button class="btn btn-success">Contact Breeder</button>
@@ -94,7 +95,7 @@
 						<h5>2 Available Today</h5>
 					</div>
 					<div class="col-xs-12">
-						<h5>Deposit $150</h5></div>
+						<h5>Deposit ${{listing.deposit}}</h5></div>
 				</div>
 			</div>
 

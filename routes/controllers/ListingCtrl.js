@@ -18,7 +18,10 @@ module.exports = {
 		var listing_id = req.params.listing_id;
 		if (!listing_id) return next(new restify.MissingParameterError('Missing Listing Id'));
 
-		db.Listing.findOne({where: {listing_id: listing_id}})
+		db.Listing.findOne({
+			where: {listing_id: listing_id},
+			include: [{model: db.ListingImage, as: 'images'}]
+		})
 		.then(function (listing) {
 			return res.send(200, {listing: listing});
 		}).catch(next);

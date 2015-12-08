@@ -21,11 +21,13 @@ app.config(['$stateProvider', function($stateProvider) {
   })
   .state('app.profile', {
     url: '/profile',
-    templateUrl: 'js/main/templates/profile.tpl.html'
+    templateUrl: 'js/main/templates/profile.tpl.html',
+    controller: 'ProfileCtrl'
   })
   .state('app.listing', {
     url: '/:listing_id',
-    templateUrl: 'js/main/templates/listing.tpl.html'
+    templateUrl: 'js/main/templates/listing.tpl.html',
+    controller: 'ListingCtrl'
   })
 
 }]);

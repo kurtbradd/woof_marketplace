@@ -7,7 +7,7 @@ module.exports = {
 
 	// HTTP GET /user
 	getProfile: function getProfile (req, res, next) {
-		db.User.findOne({where: {id: req.user}}).then(function (user) {
+		db.User.findOne({where: {user_id: req.user}}).then(function (user) {
 			return res.send(200, {user: user});
 		}).catch(next);
 	},
@@ -18,7 +18,9 @@ module.exports = {
 		var user_id = req.params.user_id;
 		if (!user_id) return next(new restify.MissingParameterError('Missing User ID'));
 
-		db.User.findOne({where: {id: user_id}}).then(function (user) {
+		db.User.findOne({
+			where: {user_id: user_id}
+		}).then(function (user) {
 			return res.send(200, {user: user});
 		}).catch(next);
 	},

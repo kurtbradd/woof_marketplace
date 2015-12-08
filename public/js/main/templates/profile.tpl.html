@@ -26,7 +26,7 @@
 		<!-- PROFILE HEADER -->
 		<div class="col-sm-12">
 			<div class="profile-header">
-				<h1>Kurt DaCosta</h1>
+				<h1>{{profile.f_name}} {{profile.l_name}}</h1>
 			</div>
 		</div>
 
@@ -36,11 +36,12 @@
 				<!-- LEFT SIDE PROFILE CONTENT -->
 				<div class="col-sm-3">
 					<div class="thumbnail profile-info">
-						<img class="img-rounded" src="img/puppy.jpg" alt="...">
+						<!-- <img class="img-rounded" src="img/puppy.jpg" alt="..."> -->
 						<div class="caption text-center">
-							<h3>Kurt DaCosta</h3>
 							<h4>Hamilton, ON</h4>
-							<p>kurt@kurtbradd.com</p>
+							<p>{{profile.age}}</p>
+							<p>{{profile.email}}</p>
+							<p>{{profile.phone}}</p>
 						</div>
 					</div>
 				</div>
@@ -62,8 +63,8 @@
 									<div class="thumbnail listing">
 										<img class="img-rounded" src="img/puppy.jpg" alt="...">
 										<div class="caption text-center">
-											<h3>Puppy Name</h3>
-											<h4>Puppy Name</h4>
+											<h3>Jack Bomber Castlefield</h3>
+											<h4>Fluffy</h4>
 											<p>$600</p>
 											<a href="#" class="btn btn-primary" role="button">More Info</a> 
 										</div>
