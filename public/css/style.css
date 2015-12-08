@@ -6,7 +6,7 @@ html {
 
 body {
 	background-color: #F7F7F7;
-	padding-top: 70px;
+	padding-top: 50px;
 	font-family: 'Lato', sans-serif;
 }
 
@@ -32,11 +32,8 @@ h3 { font-weight: 700; }
 }
 
 section {
-	/*width: 100vw;*/
+	margin-top: -50px !important;
 	height: 100vh;
-	/*padding-top: 0px !important;*/
-	/*overflow: auto;*/
-
 	background: url(../img/background.jpg)no-repeat center center fixed;
 	-webkit-background-size: cover !important;
 	-moz-background-size: cover !important;
