@@ -6,7 +6,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Woof</title>
 		<link rel="stylesheet" href="css/bootstrap.min.css">
-		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/font-awesome.min.css">
 		<link rel="stylesheet" href="css/style.css">
 		<link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Lato:300,100,700,900'>
@@ -17,27 +16,33 @@
 		
 		<div ui-view="navbar"></div>
 		<div ui-view="main"></div>
-		<div ui-view="footer"></div>
+		<div ng-hide="$state.current != 'app.home'" ui-view="footer"></div>
 
-		<!-- ANGULAR DEPENDENCIES -->
+		<!-- DEPENDENCIES -->
 		<script src="js/lib/angular.js"></script>
 		<script src="js/lib/angular-ui-router.js"></script>
 		<script src="js/lib/jquery-2.1.4.min.js"></script>
 		<script src="js/lib/lodash.min.js"></script>
 		<script src="js/lib/bootstrap.min.js"></script>
-	  <!-- CORE -->
+		<!-- APP -->
 		<script src="js/app.js"></script>
+		<!-- ROUTES -->
+		<script src="js/core/state.js"></script>
+		<script src="js/main/state.js"></script>
+	  <!-- CORE -->
 		<script src="js/core/services/VersionService.js"></script>
 		<script src="js/core/filters/VersionFilter.js"></script>
 		<script src="js/core/directives/VersionDirective.js"></script>
-		<script src="js/core/state.js"></script>
 		<script src="js/core/controllers/AppCtrl.js"></script>
-		<!-- MAIN -->
-		<script src="js/main/state.js"></script>
+		<!-- CONTROLLERS -->
 		<script src="js/main/controllers/SearchCtrl.js"></script>
 		<script src="js/main/controllers/ListingCtrl.js"></script>
 		<script src="js/main/controllers/ProfileCtrl.js"></script>
+		<script src="js/main/controllers/SignUpCtrl.js"></script>
+		<script src="js/main/controllers/SignInCtrl.js"></script>
+		<!-- SERVICES -->
 		<script src="js/main/services/ListingService.js"></script>
 		<script src="js/main/services/ProfileService.js"></script>
+		<script src="js/main/services/SessionService.js"></script>
 	</body>
 </html>
