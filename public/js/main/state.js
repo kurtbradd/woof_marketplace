@@ -13,11 +13,13 @@ app.config(['$stateProvider', function($stateProvider) {
   })
   .state('app.signup', {
     url: '/signup',
-    templateUrl: 'js/main/templates/signup.tpl.html'
+    templateUrl: 'js/main/templates/signup.tpl.html',
+    controller: 'SignUpCtrl'
   })
   .state('app.signin', {
     url: '/signin',
-    templateUrl: 'js/main/templates/signin.tpl.html'
+    templateUrl: 'js/main/templates/signin.tpl.html',
+    controller: 'SignInCtrl'
   })
   .state('app.profile', {
     url: '/profile',
