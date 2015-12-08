@@ -1,0 +1,1043 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+--
+-- Name: adminpack; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS adminpack WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION adminpack; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION adminpack IS 'administrative functions for PostgreSQL';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: Addresses; Type: TABLE; Schema: public; Owner: woof; Tablespace: 
+--
+
+CREATE TABLE "Addresses" (
+    user_id bigint NOT NULL,
+    city_id bigint NOT NULL,
+    street_name character varying(255),
+    street_number character varying(255)
+);
+
+
+ALTER TABLE public."Addresses" OWNER TO woof;
+
+--
+-- Name: Breeds; Type: TABLE; Schema: public; Owner: woof; Tablespace: 
+--
+
+CREATE TABLE "Breeds" (
+    breed_id bigint NOT NULL,
+    name character varying(255),
+    lifespan integer,
+    expected_weight integer,
+    shedding boolean,
+    child_friendly boolean
+);
+
+
+ALTER TABLE public."Breeds" OWNER TO woof;
+
+--
+-- Name: Breeds_breed_id_seq; Type: SEQUENCE; Schema: public; Owner: woof
+--
+
+CREATE SEQUENCE "Breeds_breed_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Breeds_breed_id_seq" OWNER TO woof;
+
+--
+-- Name: Breeds_breed_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: woof
+--
+
+ALTER SEQUENCE "Breeds_breed_id_seq" OWNED BY "Breeds".breed_id;
+
+
+--
+-- Name: City; Type: TABLE; Schema: public; Owner: woof; Tablespace: 
+--
+
+CREATE TABLE "City" (
+    city_id bigint NOT NULL,
+    state_id bigint NOT NULL,
+    name character varying(255)
+);
+
+
+ALTER TABLE public."City" OWNER TO woof;
+
+--
+-- Name: City_city_id_seq; Type: SEQUENCE; Schema: public; Owner: woof
+--
+
+CREATE SEQUENCE "City_city_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."City_city_id_seq" OWNER TO woof;
+
+--
+-- Name: City_city_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: woof
+--
+
+ALTER SEQUENCE "City_city_id_seq" OWNED BY "City".city_id;
+
+
+--
+-- Name: Country; Type: TABLE; Schema: public; Owner: woof; Tablespace: 
+--
+
+CREATE TABLE "Country" (
+    country_id bigint NOT NULL,
+    code character varying(255),
+    name character varying(255)
+);
+
+
+ALTER TABLE public."Country" OWNER TO woof;
+
+--
+-- Name: Country_country_id_seq; Type: SEQUENCE; Schema: public; Owner: woof
+--
+
+CREATE SEQUENCE "Country_country_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Country_country_id_seq" OWNER TO woof;
+
+--
+-- Name: Country_country_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: woof
+--
+
+ALTER SEQUENCE "Country_country_id_seq" OWNED BY "Country".country_id;
+
+
+--
+-- Name: ListingImages; Type: TABLE; Schema: public; Owner: woof; Tablespace: 
+--
+
+CREATE TABLE "ListingImages" (
+    image_id bigint NOT NULL,
+    listing_id bigint NOT NULL,
+    filepath character varying(255)
+);
+
+
+ALTER TABLE public."ListingImages" OWNER TO woof;
+
+--
+-- Name: ListingImages_image_id_seq; Type: SEQUENCE; Schema: public; Owner: woof
+--
+
+CREATE SEQUENCE "ListingImages_image_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."ListingImages_image_id_seq" OWNER TO woof;
+
+--
+-- Name: ListingImages_image_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: woof
+--
+
+ALTER SEQUENCE "ListingImages_image_id_seq" OWNED BY "ListingImages".image_id;
+
+
+--
+-- Name: Listings; Type: TABLE; Schema: public; Owner: woof; Tablespace: 
+--
+
+CREATE TABLE "Listings" (
+    listing_id bigint NOT NULL,
+    user_id bigint NOT NULL,
+    breed_id bigint NOT NULL,
+    visible boolean,
+    available boolean,
+    name character varying(255),
+    age integer,
+    cost double precision,
+    deposit double precision,
+    description character varying(255),
+    "timestamp" timestamp with time zone
+);
+
+
+ALTER TABLE public."Listings" OWNER TO woof;
+
+--
+-- Name: Listings_listing_id_seq; Type: SEQUENCE; Schema: public; Owner: woof
+--
+
+CREATE SEQUENCE "Listings_listing_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Listings_listing_id_seq" OWNER TO woof;
+
+--
+-- Name: Listings_listing_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: woof
+--
+
+ALTER SEQUENCE "Listings_listing_id_seq" OWNED BY "Listings".listing_id;
+
+
+--
+-- Name: Messages; Type: TABLE; Schema: public; Owner: woof; Tablespace: 
+--
+
+CREATE TABLE "Messages" (
+    message_id bigint NOT NULL,
+    snd_user_id bigint NOT NULL,
+    rcv_user_id bigint NOT NULL,
+    content character varying(255),
+    "timestamp" timestamp with time zone
+);
+
+
+ALTER TABLE public."Messages" OWNER TO woof;
+
+--
+-- Name: Messages_message_id_seq; Type: SEQUENCE; Schema: public; Owner: woof
+--
+
+CREATE SEQUENCE "Messages_message_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Messages_message_id_seq" OWNER TO woof;
+
+--
+-- Name: Messages_message_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: woof
+--
+
+ALTER SEQUENCE "Messages_message_id_seq" OWNED BY "Messages".message_id;
+
+
+--
+-- Name: Purchases; Type: TABLE; Schema: public; Owner: woof; Tablespace: 
+--
+
+CREATE TABLE "Purchases" (
+    purchase_id bigint NOT NULL,
+    request_id bigint NOT NULL,
+    status character varying(255),
+    "timestamp" timestamp with time zone,
+    commission double precision
+);
+
+
+ALTER TABLE public."Purchases" OWNER TO woof;
+
+--
+-- Name: Purchases_purchase_id_seq; Type: SEQUENCE; Schema: public; Owner: woof
+--
+
+CREATE SEQUENCE "Purchases_purchase_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Purchases_purchase_id_seq" OWNER TO woof;
+
+--
+-- Name: Purchases_purchase_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: woof
+--
+
+ALTER SEQUENCE "Purchases_purchase_id_seq" OWNED BY "Purchases".purchase_id;
+
+
+--
+-- Name: Requests; Type: TABLE; Schema: public; Owner: woof; Tablespace: 
+--
+
+CREATE TABLE "Requests" (
+    request_id bigint NOT NULL,
+    user_id bigint NOT NULL,
+    listing_id bigint NOT NULL,
+    status character varying(255),
+    "timestamp" timestamp with time zone
+);
+
+
+ALTER TABLE public."Requests" OWNER TO woof;
+
+--
+-- Name: Requests_request_id_seq; Type: SEQUENCE; Schema: public; Owner: woof
+--
+
+CREATE SEQUENCE "Requests_request_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Requests_request_id_seq" OWNER TO woof;
+
+--
+-- Name: Requests_request_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: woof
+--
+
+ALTER SEQUENCE "Requests_request_id_seq" OWNED BY "Requests".request_id;
+
+
+--
+-- Name: Reviews; Type: TABLE; Schema: public; Owner: woof; Tablespace: 
+--
+
+CREATE TABLE "Reviews" (
+    review_id bigint NOT NULL,
+    listing_id bigint NOT NULL,
+    user_id bigint NOT NULL,
+    content character varying(255),
+    "timestamp" timestamp with time zone
+);
+
+
+ALTER TABLE public."Reviews" OWNER TO woof;
+
+--
+-- Name: Reviews_review_id_seq; Type: SEQUENCE; Schema: public; Owner: woof
+--
+
+CREATE SEQUENCE "Reviews_review_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Reviews_review_id_seq" OWNER TO woof;
+
+--
+-- Name: Reviews_review_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: woof
+--
+
+ALTER SEQUENCE "Reviews_review_id_seq" OWNED BY "Reviews".review_id;
+
+
+--
+-- Name: State; Type: TABLE; Schema: public; Owner: woof; Tablespace: 
+--
+
+CREATE TABLE "State" (
+    state_id bigint NOT NULL,
+    country_id bigint NOT NULL,
+    name character varying(255)
+);
+
+
+ALTER TABLE public."State" OWNER TO woof;
+
+--
+-- Name: State_state_id_seq; Type: SEQUENCE; Schema: public; Owner: woof
+--
+
+CREATE SEQUENCE "State_state_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."State_state_id_seq" OWNER TO woof;
+
+--
+-- Name: State_state_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: woof
+--
+
+ALTER SEQUENCE "State_state_id_seq" OWNED BY "State".state_id;
+
+
+--
+-- Name: Tokens; Type: TABLE; Schema: public; Owner: woof; Tablespace: 
+--
+
+CREATE TABLE "Tokens" (
+    user_id bigint NOT NULL,
+    token character varying(255) NOT NULL,
+    "createdAt" timestamp with time zone NOT NULL,
+    "updatedAt" timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public."Tokens" OWNER TO woof;
+
+--
+-- Name: Users; Type: TABLE; Schema: public; Owner: woof; Tablespace: 
+--
+
+CREATE TABLE "Users" (
+    user_id bigint NOT NULL,
+    f_name character varying(255),
+    l_name character varying(255),
+    admin boolean,
+    age integer,
+    email character varying(255) NOT NULL,
+    phone character varying(255),
+    password character varying(255),
+    description character varying(255),
+    "timestamp" timestamp with time zone
+);
+
+
+ALTER TABLE public."Users" OWNER TO woof;
+
+--
+-- Name: Users_user_id_seq; Type: SEQUENCE; Schema: public; Owner: woof
+--
+
+CREATE SEQUENCE "Users_user_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Users_user_id_seq" OWNER TO woof;
+
+--
+-- Name: Users_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: woof
+--
+
+ALTER SEQUENCE "Users_user_id_seq" OWNED BY "Users".user_id;
+
+
+--
+-- Name: breed_id; Type: DEFAULT; Schema: public; Owner: woof
+--
+
+ALTER TABLE ONLY "Breeds" ALTER COLUMN breed_id SET DEFAULT nextval('"Breeds_breed_id_seq"'::regclass);
+
+
+--
+-- Name: city_id; Type: DEFAULT; Schema: public; Owner: woof
+--
+
+ALTER TABLE ONLY "City" ALTER COLUMN city_id SET DEFAULT nextval('"City_city_id_seq"'::regclass);
+
+
+--
+-- Name: country_id; Type: DEFAULT; Schema: public; Owner: woof
+--
+
+ALTER TABLE ONLY "Country" ALTER COLUMN country_id SET DEFAULT nextval('"Country_country_id_seq"'::regclass);
+
+
+--
+-- Name: image_id; Type: DEFAULT; Schema: public; Owner: woof
+--
+
+ALTER TABLE ONLY "ListingImages" ALTER COLUMN image_id SET DEFAULT nextval('"ListingImages_image_id_seq"'::regclass);
+
+
+--
+-- Name: listing_id; Type: DEFAULT; Schema: public; Owner: woof
+--
+
+ALTER TABLE ONLY "Listings" ALTER COLUMN listing_id SET DEFAULT nextval('"Listings_listing_id_seq"'::regclass);
+
+
+--
+-- Name: message_id; Type: DEFAULT; Schema: public; Owner: woof
+--
+
+ALTER TABLE ONLY "Messages" ALTER COLUMN message_id SET DEFAULT nextval('"Messages_message_id_seq"'::regclass);
+
+
+--
+-- Name: purchase_id; Type: DEFAULT; Schema: public; Owner: woof
+--
+
+ALTER TABLE ONLY "Purchases" ALTER COLUMN purchase_id SET DEFAULT nextval('"Purchases_purchase_id_seq"'::regclass);
+
+
+--
+-- Name: request_id; Type: DEFAULT; Schema: public; Owner: woof
+--
+
+ALTER TABLE ONLY "Requests" ALTER COLUMN request_id SET DEFAULT nextval('"Requests_request_id_seq"'::regclass);
+
+
+--
+-- Name: review_id; Type: DEFAULT; Schema: public; Owner: woof
+--
+
+ALTER TABLE ONLY "Reviews" ALTER COLUMN review_id SET DEFAULT nextval('"Reviews_review_id_seq"'::regclass);
+
+
+--
+-- Name: state_id; Type: DEFAULT; Schema: public; Owner: woof
+--
+
+ALTER TABLE ONLY "State" ALTER COLUMN state_id SET DEFAULT nextval('"State_state_id_seq"'::regclass);
+
+
+--
+-- Name: user_id; Type: DEFAULT; Schema: public; Owner: woof
+--
+
+ALTER TABLE ONLY "Users" ALTER COLUMN user_id SET DEFAULT nextval('"Users_user_id_seq"'::regclass);
+
+
+--
+-- Data for Name: Addresses; Type: TABLE DATA; Schema: public; Owner: woof
+--
+
+COPY "Addresses" (user_id, city_id, street_name, street_number) FROM stdin;
+2	11	East 23rd street	40
+6	2	Fulton Street	20
+3	1	Prospect Street	10
+4	5	Ocean Side Boulevard	8
+5	6	Church Street	1
+7	2	Canyon Road	3
+8	11	West 84th Street	33
+1	1	Hill Junction	22
+\.
+
+
+--
+-- Data for Name: Breeds; Type: TABLE DATA; Schema: public; Owner: woof
+--
+
+COPY "Breeds" (breed_id, name, lifespan, expected_weight, shedding, child_friendly) FROM stdin;
+1	Golden Retriever	8	50	t	t
+2	Jack Russell	12	30	t	t
+3	Puggle	11	20	t	t
+4	Bulldog	10	40	t	t
+8	Yorkshire Terrier	13	25	t	t
+9	Bichone Frise	12	11	f	t
+10	Coton de Tulear	14	15	f	t
+\.
+
+
+--
+-- Name: Breeds_breed_id_seq; Type: SEQUENCE SET; Schema: public; Owner: woof
+--
+
+SELECT pg_catalog.setval('"Breeds_breed_id_seq"', 9, true);
+
+
+--
+-- Data for Name: City; Type: TABLE DATA; Schema: public; Owner: woof
+--
+
+COPY "City" (city_id, state_id, name) FROM stdin;
+1	1	La Jolla
+2	1	San Francisco
+3	1	Los Angeles
+4	1	Palm Springs
+5	2	Miami
+6	2	Orlando
+7	2	Key West
+8	3	New Mexico
+9	4	Bismarck
+10	5	Charleston
+11	6	New York City
+\.
+
+
+--
+-- Name: City_city_id_seq; Type: SEQUENCE SET; Schema: public; Owner: woof
+--
+
+SELECT pg_catalog.setval('"City_city_id_seq"', 11, true);
+
+
+--
+-- Data for Name: Country; Type: TABLE DATA; Schema: public; Owner: woof
+--
+
+COPY "Country" (country_id, code, name) FROM stdin;
+1	US	United States
+\.
+
+
+--
+-- Name: Country_country_id_seq; Type: SEQUENCE SET; Schema: public; Owner: woof
+--
+
+SELECT pg_catalog.setval('"Country_country_id_seq"', 1, true);
+
+
+--
+-- Data for Name: ListingImages; Type: TABLE DATA; Schema: public; Owner: woof
+--
+
+COPY "ListingImages" (image_id, listing_id, filepath) FROM stdin;
+0	4	retriever1.jpg
+1	4	retriever2.jpg
+2	4	retriever3.jpg
+3	1	puggle1.jpg
+4	1	puggle2.jpg
+5	1	puggle3.jpg
+6	6	russell1.jpg
+7	6	russell2.jpg
+8	6	russell3.jpg
+\.
+
+
+--
+-- Name: ListingImages_image_id_seq; Type: SEQUENCE SET; Schema: public; Owner: woof
+--
+
+SELECT pg_catalog.setval('"ListingImages_image_id_seq"', 1, false);
+
+
+--
+-- Data for Name: Listings; Type: TABLE DATA; Schema: public; Owner: woof
+--
+
+COPY "Listings" (listing_id, user_id, breed_id, visible, available, name, age, cost, deposit, description, "timestamp") FROM stdin;
+7	8	1	t	t	Juno	3	550	100	Golden Retriever Puppy!	2015-12-06 00:00:00+00
+3	3	3	t	f	Sally	5	900	150	Puggle puppy	2015-12-03 00:00:00+00
+5	6	4	t	f	Buler	6	750	200	Bulldog puppy	2015-12-04 00:00:00+00
+8	8	8	t	f	Violet	3	700	100	Yorkshire Terrier Puppy!	2015-12-06 00:00:00+00
+2	8	2	t	f	Hugo	4	650	200	Jack Russell puppy!	2015-12-05 00:00:00+00
+1	2	3	t	t	Riley	3	500	100	Puggle Puppy	2015-12-06 00:00:00+00
+6	2	2	t	t	Nicolas	3	400	100	Jack Russell	2015-12-06 00:00:00+00
+4	2	1	t	t	Molly & Fred	3	500	125	Golden Retriever Puppy!	2015-12-06 00:00:00+00
+\.
+
+
+--
+-- Name: Listings_listing_id_seq; Type: SEQUENCE SET; Schema: public; Owner: woof
+--
+
+SELECT pg_catalog.setval('"Listings_listing_id_seq"', 5, true);
+
+
+--
+-- Data for Name: Messages; Type: TABLE DATA; Schema: public; Owner: woof
+--
+
+COPY "Messages" (message_id, snd_user_id, rcv_user_id, content, "timestamp") FROM stdin;
+\.
+
+
+--
+-- Name: Messages_message_id_seq; Type: SEQUENCE SET; Schema: public; Owner: woof
+--
+
+SELECT pg_catalog.setval('"Messages_message_id_seq"', 1, false);
+
+
+--
+-- Data for Name: Purchases; Type: TABLE DATA; Schema: public; Owner: woof
+--
+
+COPY "Purchases" (purchase_id, request_id, status, "timestamp", commission) FROM stdin;
+0	0	Purchased	2015-12-06 00:00:00+00	49
+2	2	Purchased	2015-12-03 00:00:00+00	63
+3	3	Purchased	2015-12-04 00:00:00+00	52.5
+1	1	Purchased	2015-12-05 00:00:00+00	45.5
+\.
+
+
+--
+-- Name: Purchases_purchase_id_seq; Type: SEQUENCE SET; Schema: public; Owner: woof
+--
+
+SELECT pg_catalog.setval('"Purchases_purchase_id_seq"', 9, true);
+
+
+--
+-- Data for Name: Requests; Type: TABLE DATA; Schema: public; Owner: woof
+--
+
+COPY "Requests" (request_id, user_id, listing_id, status, "timestamp") FROM stdin;
+0	1	8	Purchased	2015-12-06 00:00:00+00
+1	4	2	Purchased	2015-12-05 00:00:00+00
+2	5	3	Purchased	2015-12-03 00:00:00+00
+3	7	5	Purchased	2015-12-04 00:00:00+00
+\.
+
+
+--
+-- Name: Requests_request_id_seq; Type: SEQUENCE SET; Schema: public; Owner: woof
+--
+
+SELECT pg_catalog.setval('"Requests_request_id_seq"', 1, false);
+
+
+--
+-- Data for Name: Reviews; Type: TABLE DATA; Schema: public; Owner: woof
+--
+
+COPY "Reviews" (review_id, listing_id, user_id, content, "timestamp") FROM stdin;
+\.
+
+
+--
+-- Name: Reviews_review_id_seq; Type: SEQUENCE SET; Schema: public; Owner: woof
+--
+
+SELECT pg_catalog.setval('"Reviews_review_id_seq"', 1, false);
+
+
+--
+-- Data for Name: State; Type: TABLE DATA; Schema: public; Owner: woof
+--
+
+COPY "State" (state_id, country_id, name) FROM stdin;
+1	1	California
+2	1	Florida
+3	1	New Mexico
+4	1	North Dakota
+5	1	West Virginia
+6	1	New York
+\.
+
+
+--
+-- Name: State_state_id_seq; Type: SEQUENCE SET; Schema: public; Owner: woof
+--
+
+SELECT pg_catalog.setval('"State_state_id_seq"', 6, true);
+
+
+--
+-- Data for Name: Tokens; Type: TABLE DATA; Schema: public; Owner: woof
+--
+
+COPY "Tokens" (user_id, token, "createdAt", "updatedAt") FROM stdin;
+\.
+
+
+--
+-- Data for Name: Users; Type: TABLE DATA; Schema: public; Owner: woof
+--
+
+COPY "Users" (user_id, f_name, l_name, admin, age, email, phone, password, description, "timestamp") FROM stdin;
+2	Troy	Bergman	t	26	troy@tauri.ca	6472854119	123abc	Coolest dog owner ever	2015-12-06 00:00:00+00
+3	John	Marche	f	20	johnm@gmail.com	64723243434	123abc	Prospective dog owner	2015-12-06 00:00:00+00
+4	Ralph	Mercier	f	23	ralph@gmail.com	64723232323	123abc	Dog Breeder	2015-12-06 00:00:00+00
+5	Scott	Lipski	f	40	scott@gmail.com	64723223232	123abc	In the market for a dog!	2015-12-06 00:00:00+00
+6	Kurt	DaCosta	t	24	Kurt@gmail.com	6472223333	123abc	Lover of pugs	2015-12-06 00:00:00+00
+7	Nicolas	Cage	f	45	Nicolas@gmail.com	4165552223	123abc	Proud husky owner	2015-12-06 00:00:00+00
+8	Bruno	Mars	f	34	Bruno@gmail.com	2124445555	123abc	Dog aficiando	2015-12-06 00:00:00+00
+1	Frank	Castlefield	f	33	john@gmail.com	2234445959	123abc	Dog Buyer!	2015-12-06 00:00:00+00
+\.
+
+
+--
+-- Name: Users_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: woof
+--
+
+SELECT pg_catalog.setval('"Users_user_id_seq"', 10, true);
+
+
+--
+-- Name: Addresses_pkey; Type: CONSTRAINT; Schema: public; Owner: woof; Tablespace: 
+--
+
+ALTER TABLE ONLY "Addresses"
+    ADD CONSTRAINT "Addresses_pkey" PRIMARY KEY (user_id);
+
+
+--
+-- Name: Breeds_pkey; Type: CONSTRAINT; Schema: public; Owner: woof; Tablespace: 
+--
+
+ALTER TABLE ONLY "Breeds"
+    ADD CONSTRAINT "Breeds_pkey" PRIMARY KEY (breed_id);
+
+
+--
+-- Name: City_pkey; Type: CONSTRAINT; Schema: public; Owner: woof; Tablespace: 
+--
+
+ALTER TABLE ONLY "City"
+    ADD CONSTRAINT "City_pkey" PRIMARY KEY (city_id);
+
+
+--
+-- Name: Country_pkey; Type: CONSTRAINT; Schema: public; Owner: woof; Tablespace: 
+--
+
+ALTER TABLE ONLY "Country"
+    ADD CONSTRAINT "Country_pkey" PRIMARY KEY (country_id);
+
+
+--
+-- Name: ListingImages_pkey; Type: CONSTRAINT; Schema: public; Owner: woof; Tablespace: 
+--
+
+ALTER TABLE ONLY "ListingImages"
+    ADD CONSTRAINT "ListingImages_pkey" PRIMARY KEY (image_id);
+
+
+--
+-- Name: Listings_pkey; Type: CONSTRAINT; Schema: public; Owner: woof; Tablespace: 
+--
+
+ALTER TABLE ONLY "Listings"
+    ADD CONSTRAINT "Listings_pkey" PRIMARY KEY (listing_id);
+
+
+--
+-- Name: Messages_pkey; Type: CONSTRAINT; Schema: public; Owner: woof; Tablespace: 
+--
+
+ALTER TABLE ONLY "Messages"
+    ADD CONSTRAINT "Messages_pkey" PRIMARY KEY (message_id);
+
+
+--
+-- Name: Purchases_pkey; Type: CONSTRAINT; Schema: public; Owner: woof; Tablespace: 
+--
+
+ALTER TABLE ONLY "Purchases"
+    ADD CONSTRAINT "Purchases_pkey" PRIMARY KEY (purchase_id);
+
+
+--
+-- Name: Requests_pkey; Type: CONSTRAINT; Schema: public; Owner: woof; Tablespace: 
+--
+
+ALTER TABLE ONLY "Requests"
+    ADD CONSTRAINT "Requests_pkey" PRIMARY KEY (request_id);
+
+
+--
+-- Name: Reviews_pkey; Type: CONSTRAINT; Schema: public; Owner: woof; Tablespace: 
+--
+
+ALTER TABLE ONLY "Reviews"
+    ADD CONSTRAINT "Reviews_pkey" PRIMARY KEY (review_id);
+
+
+--
+-- Name: State_pkey; Type: CONSTRAINT; Schema: public; Owner: woof; Tablespace: 
+--
+
+ALTER TABLE ONLY "State"
+    ADD CONSTRAINT "State_pkey" PRIMARY KEY (state_id);
+
+
+--
+-- Name: Tokens_pkey; Type: CONSTRAINT; Schema: public; Owner: woof; Tablespace: 
+--
+
+ALTER TABLE ONLY "Tokens"
+    ADD CONSTRAINT "Tokens_pkey" PRIMARY KEY (user_id, token);
+
+
+--
+-- Name: Users_email_key; Type: CONSTRAINT; Schema: public; Owner: woof; Tablespace: 
+--
+
+ALTER TABLE ONLY "Users"
+    ADD CONSTRAINT "Users_email_key" UNIQUE (email);
+
+
+--
+-- Name: Users_pkey; Type: CONSTRAINT; Schema: public; Owner: woof; Tablespace: 
+--
+
+ALTER TABLE ONLY "Users"
+    ADD CONSTRAINT "Users_pkey" PRIMARY KEY (user_id);
+
+
+--
+-- Name: Addresses_city_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: woof
+--
+
+ALTER TABLE ONLY "Addresses"
+    ADD CONSTRAINT "Addresses_city_id_fkey" FOREIGN KEY (city_id) REFERENCES "City"(city_id);
+
+
+--
+-- Name: Addresses_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: woof
+--
+
+ALTER TABLE ONLY "Addresses"
+    ADD CONSTRAINT "Addresses_user_id_fkey" FOREIGN KEY (user_id) REFERENCES "Users"(user_id);
+
+
+--
+-- Name: City_state_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: woof
+--
+
+ALTER TABLE ONLY "City"
+    ADD CONSTRAINT "City_state_id_fkey" FOREIGN KEY (state_id) REFERENCES "State"(state_id);
+
+
+--
+-- Name: ListingImages_listing_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: woof
+--
+
+ALTER TABLE ONLY "ListingImages"
+    ADD CONSTRAINT "ListingImages_listing_id_fkey" FOREIGN KEY (listing_id) REFERENCES "Listings"(listing_id);
+
+
+--
+-- Name: Listings_breed_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: woof
+--
+
+ALTER TABLE ONLY "Listings"
+    ADD CONSTRAINT "Listings_breed_id_fkey" FOREIGN KEY (breed_id) REFERENCES "Breeds"(breed_id);
+
+
+--
+-- Name: Listings_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: woof
+--
+
+ALTER TABLE ONLY "Listings"
+    ADD CONSTRAINT "Listings_user_id_fkey" FOREIGN KEY (user_id) REFERENCES "Users"(user_id);
+
+
+--
+-- Name: Messages_rcv_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: woof
+--
+
+ALTER TABLE ONLY "Messages"
+    ADD CONSTRAINT "Messages_rcv_user_id_fkey" FOREIGN KEY (rcv_user_id) REFERENCES "Users"(user_id);
+
+
+--
+-- Name: Messages_snd_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: woof
+--
+
+ALTER TABLE ONLY "Messages"
+    ADD CONSTRAINT "Messages_snd_user_id_fkey" FOREIGN KEY (snd_user_id) REFERENCES "Users"(user_id);
+
+
+--
+-- Name: Purchases_request_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: woof
+--
+
+ALTER TABLE ONLY "Purchases"
+    ADD CONSTRAINT "Purchases_request_id_fkey" FOREIGN KEY (request_id) REFERENCES "Requests"(request_id);
+
+
+--
+-- Name: Requests_listing_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: woof
+--
+
+ALTER TABLE ONLY "Requests"
+    ADD CONSTRAINT "Requests_listing_id_fkey" FOREIGN KEY (listing_id) REFERENCES "Listings"(listing_id);
+
+
+--
+-- Name: Requests_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: woof
+--
+
+ALTER TABLE ONLY "Requests"
+    ADD CONSTRAINT "Requests_user_id_fkey" FOREIGN KEY (user_id) REFERENCES "Users"(user_id);
+
+
+--
+-- Name: Reviews_listing_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: woof
+--
+
+ALTER TABLE ONLY "Reviews"
+    ADD CONSTRAINT "Reviews_listing_id_fkey" FOREIGN KEY (listing_id) REFERENCES "Listings"(listing_id);
+
+
+--
+-- Name: Reviews_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: woof
+--
+
+ALTER TABLE ONLY "Reviews"
+    ADD CONSTRAINT "Reviews_user_id_fkey" FOREIGN KEY (user_id) REFERENCES "Users"(user_id);
+
+
+--
+-- Name: State_country_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: woof
+--
+
+ALTER TABLE ONLY "State"
+    ADD CONSTRAINT "State_country_id_fkey" FOREIGN KEY (country_id) REFERENCES "Country"(country_id);
+
+
+--
+-- Name: Tokens_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: woof
+--
+
+ALTER TABLE ONLY "Tokens"
+    ADD CONSTRAINT "Tokens_user_id_fkey" FOREIGN KEY (user_id) REFERENCES "Users"(user_id);
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
