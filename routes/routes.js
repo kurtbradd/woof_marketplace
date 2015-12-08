@@ -7,11 +7,11 @@ var TokenManager = require('../modules/TokenManager.js');
 module.exports = function (server) {
 
 
-  server.use(function (req, res, next) {
-    if (req.url == '/session/register') return next();
-    if (req.url == '/session/login') return next();
-    TokenManager.verifyToken(req, res, next);
-  })
+  // server.use(function (req, res, next) {
+  //   if (req.url == '/session/register') return next();
+  //   if (req.url == '/session/login') return next();
+  //   TokenManager.verifyToken(req, res, next);
+  // })
 
   // SESSIONS
   var sessionsEndpoint = '/session';
@@ -35,6 +35,7 @@ module.exports = function (server) {
   server.get (listingEndpoint + '/:listing_id',ListingCtrl.getListing);
   server.post(listingEndpoint + '/:listing_id',ListingCtrl.updateListing);
   server.del (listingEndpoint + '/:listing_id',ListingCtrl.deleteListing);
+  server.get (listingEndpoint + '/:listing_id/images',ListingCtrl.getListingImages);
 
   // REVIEW
   var reviewEndpoint = '/review';
