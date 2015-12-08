@@ -30,8 +30,14 @@ module.exports = function(sequelize, DataTypes) {
 		timestamp: DataTypes.DATE
 	}, {
 		timestamps: false,
-		tableName: 'Listings'
+		tableName: 'Listings',
+		classMethods: {
+			associate: function (models) {
+				Listing.hasMany(models.ListingImage, {
+					as: 'images', foreignKey: 'listing_id'
+				})
+			}
+		}
 	});
-
 	return Listing;
 };
