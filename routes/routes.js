@@ -36,17 +36,6 @@ module.exports = function (server) {
   server.post(listingEndpoint + '/:listing_id',ListingCtrl.updateListing);
   server.del (listingEndpoint + '/:listing_id',ListingCtrl.deleteListing);
   server.get (listingEndpoint + '/:listing_id/images',ListingCtrl.getListingImages);
-
-  // REVIEW
-  var reviewEndpoint = '/review';
-
-  // TRANSACTION
-  var transaction = '/'
-  
-  // TEST ROUTE
-  server.get('/echo/:name', function (req, res, next) {
-    return res.send(req.params);
-  });
-  
+    
   console.log('Routes loaded');
 }
