@@ -26,7 +26,7 @@ require('./models/index').loadModels(function (err) {
 });
 
 // Static Files
-server.get(/\/?.(js|css|html)/, restify.serveStatic({
+server.get(/\/?.(js|css|html|jpg|png)/, restify.serveStatic({
   directory: __dirname + '/public',
   default: 'index.html',
   match: /^((?!app.js).)*$/
