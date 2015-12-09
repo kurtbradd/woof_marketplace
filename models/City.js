@@ -18,7 +18,14 @@ module.exports = function(sequelize, DataTypes) {
 		name: DataTypes.STRING
 	}, {
 		timestamps: false,
-		tableName: 'City'
+		tableName: 'City',
+		classMethods: {
+			associate: function (models) {
+				City.hasMany(models.Address, {
+					as: 'addresses', foreignKey: 'city_id'
+				})
+			}
+		}
 	});
 
 	return City;
