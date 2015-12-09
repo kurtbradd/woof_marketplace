@@ -2,6 +2,7 @@ var restify     = require('restify');
 var UserCtrl    = require('./controllers/UserCtrl');
 var SessionCtrl = require('./controllers/SessionCtrl');
 var ListingCtrl = require('./controllers/ListingCtrl');
+var LocationCtrl = require('./controllers/LocationCtrl');
 var TokenManager = require('../modules/TokenManager.js');
 
 module.exports = function (server) {
@@ -36,6 +37,10 @@ module.exports = function (server) {
   server.post(listingEndpoint + '/:listing_id',ListingCtrl.updateListing);
   server.del (listingEndpoint + '/:listing_id',ListingCtrl.deleteListing);
   server.get (listingEndpoint + '/:listing_id/images',ListingCtrl.getListingImages);
-    
+
+  // ADDRESS
+  var addressEndpoint = '/locations';
+  server.get (addressEndpoint + '/', LocationCtrl.getLocations);
+
   console.log('Routes loaded');
 }
