@@ -18,7 +18,14 @@ module.exports = function(sequelize, DataTypes) {
 		filepath: DataTypes.STRING
 	}, {
 		timestamps: false,
-		tableName: 'ListingImages'
+		tableName: 'ListingImages',
+		classMethods: {
+			associate: function (models) {
+				ListingImage.belongsTo(models.Listing, {
+					as: 'listing', foreignKey: 'listing_id'
+				})
+			}
+		}
 	});
 
 	return ListingImage;

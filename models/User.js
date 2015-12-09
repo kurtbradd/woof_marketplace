@@ -29,6 +29,28 @@ module.exports = function(sequelize, DataTypes) {
 	}, {
 		timestamps: false,
 		tableName: 'Users',
+		classMethods: {
+			associate: function (models) {
+				User.hasMany(models.Listing, {
+					as: 'listings', foreignKey: 'user_id'
+				})
+				User.hasMany(models.Request, {
+					as: 'requests', foreignKey: 'user_id'
+				})
+				User.hasMany(models.Token, {
+					as: 'tokens', foreignKey: 'user_id'
+				})
+				User.hasMany(models.Message, {
+					as: 'received_messages', foreignKey: 'rcv_user_id'
+				})
+				User.hasMany(models.Message, {
+					as: 'sent_messages', foreignKey: 'snd_user_id'
+				})
+				User.hasOne(models.Address, {
+					as: 'address', foreignKey: 'user_id'
+				})
+			}
+		},
 		instanceMethods: {
 			toJSON: function () {
 				var values = this.get();

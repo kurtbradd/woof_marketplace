@@ -36,6 +36,18 @@ module.exports = function(sequelize, DataTypes) {
 				Listing.hasMany(models.ListingImage, {
 					as: 'images', foreignKey: 'listing_id'
 				})
+				Listing.hasMany(models.Request, {
+					as: 'requests', foreignKey: 'user_id'
+				})
+				Listing.hasMany(models.Review, {
+					as: 'reviews', foreignKey: 'listing_id'
+				})
+				Listing.belongsTo(models.Breed, {
+					as: 'breed', foreignKey: 'breed_id'
+				})
+				Listing.belongsTo(models.User, {
+					as: 'breeder', foreignKey: 'user_id'
+				})
 			}
 		}
 	});

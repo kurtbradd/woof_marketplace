@@ -14,6 +14,13 @@ module.exports = function(sequelize, DataTypes) {
 	},{
 		timestamps: false,
 		tableName: 'Tokens',
+		classMethods: {
+			associate: function (models) {
+				Token.belongsTo(models.User, {
+					as: 'user', foreignKey: 'user_id'
+				})
+			}
+		}
 	});
 	return Token;
 };

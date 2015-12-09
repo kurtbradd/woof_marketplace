@@ -17,7 +17,14 @@ module.exports = function(sequelize, DataTypes) {
 		child_friendly: DataTypes.BOOLEAN
 	}, {
 		timestamps: false,
-		tableName: 'Breeds'
+		tableName: 'Breeds',
+		classMethods: {
+			associate: function (models) {
+				Breed.hasMany(models.Listing, {
+					as: 'listings', foreignKey: 'breed_id'
+				})
+			}
+		}
 	});
 
 	return Breed;

@@ -24,7 +24,20 @@ module.exports = function(sequelize, DataTypes) {
 		timestamp: DataTypes.DATE
 	}, {
 		timestamps: false,
-		tableName: 'Requests'
+		tableName: 'Requests',
+		classMethods: {
+			associate: function (models) {
+				Request.belongsTo(models.User, {
+					as: 'user', foreignKey: 'user_id'
+				})
+				Request.belongsTo(models.Listing, {
+					as: 'listing', foreignKey: 'listing_id'
+				})
+				Request.hasOne(models.Purchase, {
+					as: 'purchase', foreignKey: 'request_id'
+				})
+			}
+		}
 	});
 
 	return Request;

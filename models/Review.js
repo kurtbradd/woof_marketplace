@@ -24,7 +24,17 @@ module.exports = function(sequelize, DataTypes) {
 		timestamp: DataTypes.DATE
 	}, {
 		timestamps: false,
-		tableName: 'Reviews'
+		tableName: 'Reviews',
+		classMethods: {
+			associate: function (models) {
+				Review.belongsTo(models.Listing, {
+					as: 'listing', foreignKey: 'listing_id'
+				})
+				Review.belongsTo(models.User, {
+					as: 'user', foreignKey: 'user_id'
+				})
+			}
+		}
 	});
 
 	return Review;

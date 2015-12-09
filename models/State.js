@@ -24,6 +24,9 @@ module.exports = function(sequelize, DataTypes) {
 				State.hasMany(models.City, {
 					as: 'cities', foreignKey: 'state_id'
 				})
+				State.belongsTo(models.Country, {
+					as: 'country', foreignKey: 'country_id'
+				})
 			}
 		}
 	});

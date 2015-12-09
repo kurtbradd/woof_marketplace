@@ -24,7 +24,17 @@ module.exports = function(sequelize, DataTypes) {
 		timestamp: DataTypes.DATE
 	}, {
 		timestamps: false,
-		tableName: 'Messages'
+		tableName: 'Messages',
+		classMethods: {
+			associate: function (models) {
+				Message.belongsTo(models.User, {
+					as: 'sender', foreignKey: 'snd_user_id'
+				})
+				Message.belongsTo(models.User, {
+					as: 'receiver', foreignKey: 'rcv_user_id'
+				})
+			}
+		}
 	});
 
 	return Message;

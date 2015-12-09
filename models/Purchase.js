@@ -20,7 +20,14 @@ module.exports = function(sequelize, DataTypes) {
 		commission: DataTypes.FLOAT
 	}, {
 		timestamps: false,
-		tableName: 'Purchases'
+		tableName: 'Purchases',
+		classMethods: {
+			associate: function (models) {
+				Purchase.belongsTo(models.Request, {
+					as: 'request', foreignKey: 'request_id'
+				})
+			}
+		}
 	});
 
 	return Purchase;
